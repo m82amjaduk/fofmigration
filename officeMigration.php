@@ -104,8 +104,8 @@ function processCSV($processedArray, $handle){
  * @author Amjad Mojumder amzad.fof@gmail.com
  */
 
-function insertData($processedArray){
-    $sql = "INSERT INTO office SET ";
+function  insertQueryFromArray($processedArray, $table ){
+    $sql = "INSERT INTO ".$table. " SET ";
 
     $arraySize = sizeof($processedArray);
     $i=0;
@@ -116,6 +116,11 @@ function insertData($processedArray){
         //Add , after each entry except last element.
         if($i < $arraySize) $sql .= ', ';
     }
+    return $sql;
+}
+
+function  insertData($processedArray){
+    $sql = insertQueryFromArray($processedArray, 'office' ); 
 
     $result=mysql_query( $sql);
     if(!$result){
