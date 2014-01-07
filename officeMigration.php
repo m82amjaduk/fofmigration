@@ -99,8 +99,8 @@ function processCSV($processedArray, $handle){
 
 
 /*
- * Insert data in to table,
- * @returns error message if applicable
+ * Read an array and creates a SQL query.
+ * @returns SQL String
  * @author Amjad Mojumder amzad.fof@gmail.com
  */
 
@@ -119,8 +119,15 @@ function  insertQueryFromArray($processedArray, $table ){
     return $sql;
 }
 
+
+/*
+ * Insert data in to table,
+ * @returns error message if applicable
+ * @author Amjad Mojumder amzad.fof@gmail.com
+ */
+
 function  insertData($processedArray){
-    $sql = insertQueryFromArray($processedArray, 'office' ); 
+    $sql = insertQueryFromArray($processedArray, 'office' );
 
     $result=mysql_query( $sql);
     if(!$result){
