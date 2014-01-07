@@ -2,7 +2,7 @@
 require 'config/dbCon.php';
 require 'config/dbFunc.php';
 //require 'config/Func.php';
-// Changes
+
 ?>
 Office Migration... <br />
 
@@ -99,29 +99,13 @@ function processCSV($processedArray, $handle){
 
 
 /*
- * Insert data in to table,
- * @returns error message if applicable
+ * Read an array and creates a SQL query.
+ * @returns SQL String
  * @author Amjad Mojumder amzad.fof@gmail.com
  */
 
-function insertData($processedArray){
-    /*   $columns = implode(", ",array_keys($insData));
-  //    $escaped_values = array_map('mysql_real_escape_string', array_values($insData));
-      $values  = implode(", ", $insData);
-      $sql = "INSERT INTO office ($columns) VALUES ($values)"
-      /*
-          $sql = "INSERT INTO office (id, country_id, company_id, contract_attachment_id, quality_id, name,
-          is_searchable_on_fmo, availability, postcode, latitude, longitude, area, street, part_of_country, send_address, incentive,
-           incentive_expires_at, priority, frontend_display_address, incoming_lead_email, capacity_minimum_people,
-           capacity_maximum_people, created_at, updated_at, deleted_at, address_number, is_viewable_on_web, off_market_popup,
-           frontend_title_tag, frontend_meta_description, frontend_h1_tag)
-
-            VALUES (74036, 455, 36475, 1 , 2, 'Waterfront Studios', 1, '', 'E161AH', '51.505982', '0.015755', 'Canning Town', 'Dock Road',
-            'East London', '1 Dock Road London E16 1AH', '', '', 'neutral', 'Dock Road E16', 'daniel.c@gle.co.uk', '', '',
-            '2013-01-01 00:00:00', '2013-12-01 12:12:12', 'NULL', '1', 1, 0, 'Dock Road Offices To Let Canning Town E16 ! FreeOfficeFinder',
-            'Click Now To View Dock Road Canning Town Office Space To Let And Serviced Office Space To Rent In East London E16 ! Visit FreeOfficeFinder.com', '')";
-         */
-    $sql = "INSERT INTO office SET ";
+function  insertQueryFromArray($processedArray, $table ){
+    $sql = "INSERT INTO ".$table. " SET ";
 
     $arraySize = sizeof($processedArray);
     $i=0;
@@ -132,8 +116,19 @@ function insertData($processedArray){
         //Add , after each entry except last element.
         if($i < $arraySize) $sql .= ', ';
     }
+    return $sql;
+}
 
-//    echo $sql;
+
+/*
+ * Insert data in to table,
+ * @returns error message if applicable
+ * @author Amjad Mojumder amzad.fof@gmail.com
+ */
+
+function  insertData($processedArray){
+    $sql = insertQueryFromArray($processedArray, 'office' );
+
     $result=mysql_query( $sql);
     if(!$result){
         return mysql_error();
@@ -236,7 +231,5 @@ function getArray($line){
     return $data2;
 
 }
-
-
 
 ?>
