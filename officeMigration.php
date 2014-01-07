@@ -2,7 +2,7 @@
 require 'config/dbCon.php';
 require 'config/dbFunc.php';
 //require 'config/Func.php';
-// Changes
+
 ?>
 Office Migration... <br />
 

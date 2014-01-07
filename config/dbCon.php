@@ -8,5 +8,5 @@ $db_database = 'phoenix';
 //connect to the database
 mysql_connect($db_host, $db_username, $db_password);
 @mysql_select_db($db_database) or die("Unable to select database");
-echo "Connected<br /><br />";
+
 ?>
