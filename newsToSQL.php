@@ -1,9 +1,15 @@
+/*
+add table wp_posts to fofmigration databse.
+And this Script will copy all the news from we_posts to news table.
+
+http://fofmigration.local/newsToSQL.php
+*/
+
 <?
 require 'config/dbCon.php';
 require 'config/dbFunc.php';
 require 'config/Func.php';
 ?>
-
 
 
 <?
@@ -62,12 +68,15 @@ $sqlData = getRow('wp_posts', $col, $where );
         $summary=$summaryData[0];
 
         $caption = "/\[caption(.*)caption\]/U";
-        $summary =  preg_replace($caption, '',$summary);
-        $summary = mysql_real_escape_string($summary);
+        $summary =   preg_replace($caption, '',$summary);
+        $summary = // mysql_real_escape_string($summary);
+            "Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real ";
+
         $articleNoCaption =  preg_replace($caption, '', $articleNoSum);
         $more = "/<!--more-->/U";
         $body =  preg_replace($more, '', $articleNoCaption);
-        $body = mysql_real_escape_string($body);
+        $body =  // mysql_real_escape_string($body);
+            "Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real Climate Change Capital has sold 3-5 Morrison Street in Edinburgh to AXA Real ";
 
         $img = grabAllImageHtmlContent($articleOri);
 
@@ -90,10 +99,10 @@ $sqlData = getRow('wp_posts', $col, $where );
         VALUES ('$title', '$summary', '$body', '$imgListPage', 0, '$imgViewPage', '$imgViewPageWidth', 'left', '$publishTime',
         200, '$metaTitle', '$metaDescription',  '$metaKeyWords', '$lastUpdated', 1 )";
 
-//    if(!empty($title)) $query_result = mysql_query($query);
-//    else echo 'empty TITLE'.$id;
-//    echo ($query_result)  ? ''  : '<br><br>** '.$id.$query;
-//    $idSQL = mysql_insert_id();
+    if(!empty($title)) $query_result = mysql_query($query);
+    else echo 'empty TITLE'.$id;
+    echo ($query_result)  ? ''  : '<br><br>** '.$id.$query;
+    $idSQL = mysql_insert_id();
 
 /*
 $i++;

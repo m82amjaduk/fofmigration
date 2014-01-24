@@ -11,7 +11,7 @@ $file = "source/office.csv" ;
 $file = fopen($file,"r");
 
 
-$fileOutput="officeOutput.csv";
+$fileOutput="output/officeOutput.csv";
 if (file_exists($fileOutput))
     unlink($fileOutput);
 $handle = fopen($fileOutput, "a");
@@ -57,6 +57,7 @@ function processCSV($processedArray, $handle){
     $error .= validateInt($processedArray, 'latitude',  TRUE);
     $error .= validateInt($processedArray, 'longitude',  TRUE);
     $error .= validateString($processedArray, 'area',  TRUE, 255 );
+    $error .= validateString($processedArray, 'address_number',  TRUE, 128 );
     $error .= validateString($processedArray, 'street',  TRUE, 255 );
     $error .= validateString($processedArray, 'part_of_country',  TRUE, 255 );
 
@@ -73,7 +74,6 @@ function processCSV($processedArray, $handle){
     $error .= validateString($processedArray, 'created_at',  TRUE, 255);
     $error .= validateString($processedArray, 'updated_at',  TRUE, 255);
     $error .= validateString($processedArray, 'deleted_at',  FALSE, 255);
-    $error .= validateString($processedArray, 'address_number',  TRUE, 128 );
     $error .= validateInt($processedArray, 'is_viewable_on_web', TRUE);
     $error .= validateInt($processedArray, 'off_market_popup', TRUE);
     $error .= validateString($processedArray, 'frontend_title_tag',  FALSE, 150 );
@@ -188,13 +188,15 @@ function getArray($line){
     foreach($line as $row){
         $data .= $row;
     }
-    $data = explode("|", $data);  // echo '<pre>'; print_r($data);
+    echo $data;
+    $data = explode("|", $data);  //
+    echo '<pre>'; print_r($data);
 
     $contract_attachment_id = (notNull($data[3])) ? $data[3] : 1;
 
     $data2 = array(
         'id' => $data[0],
-        'country_id' => $data[1],
+        'country_id' => 273,
         'company_id' => $data[2],
         'contract_attachment_id' => $contract_attachment_id,
         'quality_id' => $data[4],

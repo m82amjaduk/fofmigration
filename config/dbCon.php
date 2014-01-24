@@ -2,7 +2,7 @@
 $db_host = 'localhost';
 $db_username = 'phoenix';
 $db_password = 'phoenix789';
-$db_database = 'phoenix';
+$db_database = 'fofmigration';
 
 
 //connect to the database
